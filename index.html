@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <script src="./node_modules/easytimer.js/dist/easytimer.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="wallpaper"></div>
+    <div class="container">
+      <div class="clock">
+        <span style="outline: none;" id="hour" contenteditable="true">00</span
+        >:<span style="outline: none;" id="minute" contenteditable="true"
+          >00</span
+        >:<span id="second" style="outline: none;" contenteditable="true"
+          >00</span
+        >
+      </div>
+      <div class="controls">
+        <button onclick="start()" class="startButton">START</button>
+        <button onclick="stop()" class="stopButton">STOP</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const { ipcRenderer } = require("electron");
+    var timer = new easytimer.Timer();
+    function start() {
+      button();
+      let hours = document.getElementById("hour").innerHTML;
+      let minutes = document.getElementById("minute").innerHTML;
+      let seconds = document.getElementById("second").innerHTML;
+
+      timer.start({
+        countdown: true,
+        startValues: {
+          hours: Number(hours),
+          minutes: Number(minutes),
+          seconds: Number(seconds)
+        }
+      });
+    }
+    function stop() {
+      timer.stop();
+      ipcRenderer.send("KillShia");
+      document.getElementById("hour").innerHTML = "00";
+      document.getElementById("minute").innerHTML = "00";
+      document.getElementById("second").innerHTML = "00";
+    }
+
+    timer.addEventListener("secondsUpdated", function(e) {
+      const timeLeft = timer.getTimeValues().toString();
+      var timeLeftArray = timeLeft.split(":");
+      document.getElementById("hour").innerHTML = timeLeftArray[0];
+      document.getElementById("minute").innerHTML = timeLeftArray[1];
+      document.getElementById("second").innerHTML = timeLeftArray[2];
+
+      console.log(timer.getTimeValues().toString());
+    });
+
+    timer.addEventListener("targetAchieved", function(e) {
+      ipcRenderer.send("HeresShia", "ping");
+    });
+
+    function button() {
+      new Audio("./assets/button.wav").play();
+    }
+  </script>
+
+  <style>
+    body {
+      margin: 0px;
+      background-color: black;
+      font-family: "Bungee Shade", cursive;
+    }
+    .wallpaper {
+      position: fixed;
+      -webkit-app-region: drag;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("./assets/wallpaper.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: 50% 50%;
+      filter: blur(40px);
+    }
+
+    .container {
+      position: relative;
+      display: grid;
+      grid-template-rows: 50% 50%;
+      width: 100vw;
+      height: 100vh;
+    }
+    button {
+      -webkit-app-region: drag;
+      width: 100px;
+      height: 50px;
+      z-index: 3;
+      border-radius: 10px;
+      color: white;
+      outline: none;
+      background: transparent;
+      font-size: 15pt;
+      font-family: "Bungee Shade", cursive;
+    }
+
+    .stopButton:hover {
+      background-color: tomato;
+    }
+
+    .startButton:hover {
+      background-color: lightgreen;
+    }
+
+    .clock {
+      font-size: 40pt;
+      color: white;
+      margin: auto;
+      bottom: 0px;
+      outline: none;
+    }
+    .controls {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</html>

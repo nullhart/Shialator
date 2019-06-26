@@ -1,0 +1,20 @@
+{
+  "name": "shialator",
+  "version": "1.0.0",
+  "description": "An app to motivate us lazy people",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/electron/dist/Electron.app/Contents/MacOS/Electron .",
+    "buildMac": "electron-packager . --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases' && electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite"
+  },
+  "author": "Blake Mastrud",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^5.0.5",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^14.0.0"
+  },
+  "dependencies": {
+    "easytimer.js": "^3.2.0"
+  }
+}
