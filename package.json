@@ -4,8 +4,10 @@
   "description": "An app to motivate us lazy people",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/electron/dist/Electron.app/Contents/MacOS/Electron .",
-    "buildMac": "electron-packager . --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases' && electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite"
+    "start": "Electron .",
+    "build": "electron-packager . --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases'",
+    "packageMac": "electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite",
+    "packageWin": "node ./buildWin.js"
   },
   "author": "Blake Mastrud",
   "license": "ISC",
