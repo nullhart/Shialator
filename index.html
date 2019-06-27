@@ -2,12 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>Shialator</title>
     <script src="./node_modules/easytimer.js/dist/easytimer.min.js"></script>
-    <link
-      href="https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap"
-      rel="stylesheet"
-    />
   </head>
 
   <body>
@@ -30,6 +26,7 @@
 
   <script>
     const { ipcRenderer } = require("electron");
+    const clickSound = new Audio("./assets/button.wav");
     var timer = new easytimer.Timer();
     function start() {
       button();
@@ -69,15 +66,20 @@
     });
 
     function button() {
-      new Audio("./assets/button.wav").play();
+      clickSound.play();
     }
   </script>
 
   <style>
+    @font-face {
+      font-family: Neoneon;
+      src: url("./assets/Neoneon.otf") format("opentype");
+    }
+
     body {
       margin: 0px;
       background-color: black;
-      font-family: "Bungee Shade", cursive;
+      font-family: "Neoneon", cursive;
     }
     .wallpaper {
       position: fixed;
@@ -110,15 +112,30 @@
       outline: none;
       background: transparent;
       font-size: 15pt;
-      font-family: "Bungee Shade", cursive;
+      font-family: "Neoneon", cursive;
+      font-weight: bold;
+      filter: drop-shadow(3px 3px 10px 30px);
     }
 
     .stopButton:hover {
-      background-color: tomato;
+      filter: drop-shadow(0px 0px 10px tomato);
+      color: tomato;
+      border-color: tomato;
     }
 
     .startButton:hover {
-      background-color: lightgreen;
+      filter: drop-shadow(0px 0px 10px lightgreen);
+      color: lightgreen;
+      border-color: lightgreen;
+    }
+
+    .startButton {
+      filter: drop-shadow(0px 0px 10px white);
+      margin: 5px;
+    }
+    .stopButton {
+      filter: drop-shadow(0px 0px 10px white);
+      margin: 5px;
     }
 
     .clock {
@@ -127,6 +144,7 @@
       margin: auto;
       bottom: 0px;
       outline: none;
+      filter: drop-shadow(0px 0px 10px white);
     }
     .controls {
       margin-left: auto;
