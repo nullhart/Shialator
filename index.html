@@ -1,154 +1,224 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Shialator</title>
-    <script src="./node_modules/easytimer.js/dist/easytimer.min.js"></script>
-  </head>
 
-  <body>
-    <div class="wallpaper"></div>
-    <div class="container">
-      <div class="clock">
-        <span style="outline: none;" id="hour" contenteditable="true">00</span
-        >:<span style="outline: none;" id="minute" contenteditable="true"
-          >00</span
-        >:<span id="second" style="outline: none;" contenteditable="true"
-          >00</span
-        >
-      </div>
-      <div class="controls">
-        <button onclick="start()" class="startButton">START</button>
-        <button onclick="stop()" class="stopButton">STOP</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Shialator</title>
+  <script src="./node_modules/easytimer.js/dist/easytimer.min.js"></script>
+</head>
+
+<body>
+
+  <div class="wallpaper"></div>
+  <div class="container">
+    <div class="winControls" id="winControls">
+      <button class="close" id="close" onclick="exit()">&times;</button>
+      <button class="min" id="min" onclick="min()">&minus;</button>
     </div>
-  </body>
+    <div class="clock">
+      <span style="outline: none;" id="hour" contenteditable="true">00</span>:<span style="outline: none;" id="minute"
+        contenteditable="true">00</span>:<span id="second" style="outline: none;" contenteditable="true">00</span>
+    </div>
+    <div class="controls">
+      <button onclick="start()" class="startButton">START</button>
+      <button onclick="stop()" class="stopButton">STOP</button>
+    </div>
+  </div>
+</body>
 
-  <script>
-    const { ipcRenderer } = require("electron");
-    const clickSound = new Audio("./assets/button.wav");
-    var timer = new easytimer.Timer();
-    function start() {
-      button();
-      let hours = document.getElementById("hour").innerHTML;
-      let minutes = document.getElementById("minute").innerHTML;
-      let seconds = document.getElementById("second").innerHTML;
+<script>
+  const { ipcRenderer, remote } = require("electron");
 
-      timer.start({
-        countdown: true,
-        startValues: {
-          hours: Number(hours),
-          minutes: Number(minutes),
-          seconds: Number(seconds)
-        }
-      });
-    }
-    function stop() {
-      timer.stop();
-      ipcRenderer.send("KillShia");
-      document.getElementById("hour").innerHTML = "00";
-      document.getElementById("minute").innerHTML = "00";
-      document.getElementById("second").innerHTML = "00";
-    }
+  if (process.platform != 'win32') {
+    document.getElementById('close').style = 'display: none'
+    document.getElementById('min').style = 'display: none'
+  }
 
-    timer.addEventListener("secondsUpdated", function(e) {
-      const timeLeft = timer.getTimeValues().toString();
-      var timeLeftArray = timeLeft.split(":");
-      document.getElementById("hour").innerHTML = timeLeftArray[0];
-      document.getElementById("minute").innerHTML = timeLeftArray[1];
-      document.getElementById("second").innerHTML = timeLeftArray[2];
 
-      console.log(timer.getTimeValues().toString());
+
+  const clickSound = new Audio("./assets/button.wav");
+  var timer = new easytimer.Timer();
+
+  function exit() {
+    let w = remote.getCurrentWindow()
+    w.close()
+  }
+
+  function min() {
+    var window = remote.BrowserWindow.getFocusedWindow();
+    window.minimize();
+  }
+
+  function start() {
+    button();
+    let hours = document.getElementById("hour").innerHTML;
+    let minutes = document.getElementById("minute").innerHTML;
+    let seconds = document.getElementById("second").innerHTML;
+
+    timer.start({
+      countdown: true,
+      startValues: {
+        hours: Number(hours),
+        minutes: Number(minutes),
+        seconds: Number(seconds)
+      }
     });
+  }
+  function stop() {
+    timer.stop();
+    ipcRenderer.send("KillShia");
+    document.getElementById("hour").innerHTML = "00";
+    document.getElementById("minute").innerHTML = "00";
+    document.getElementById("second").innerHTML = "00";
+  }
 
-    timer.addEventListener("targetAchieved", function(e) {
-      ipcRenderer.send("HeresShia", "ping");
-    });
+  timer.addEventListener("secondsUpdated", function (e) {
+    const timeLeft = timer.getTimeValues().toString();
+    var timeLeftArray = timeLeft.split(":");
+    document.getElementById("hour").innerHTML = timeLeftArray[0];
+    document.getElementById("minute").innerHTML = timeLeftArray[1];
+    document.getElementById("second").innerHTML = timeLeftArray[2];
 
-    function button() {
-      clickSound.play();
-    }
-  </script>
+    console.log(timer.getTimeValues().toString());
+  });
 
-  <style>
-    @font-face {
-      font-family: Neoneon;
-      src: url("./assets/Neoneon.otf") format("opentype");
-    }
+  timer.addEventListener("targetAchieved", function (e) {
+    ipcRenderer.send("HeresShia", "ping");
+  });
 
-    body {
-      margin: 0px;
-      background-color: black;
-      font-family: "Neoneon", cursive;
-    }
-    .wallpaper {
-      position: fixed;
-      -webkit-app-region: drag;
-      z-index: -1;
-      width: 100vw;
-      height: 100vh;
-      background-image: url("./assets/wallpaper.jpg");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: 50% 50%;
-      filter: blur(40px);
-    }
+  function button() {
+    clickSound.play();
+  }
 
-    .container {
-      position: relative;
-      display: grid;
-      grid-template-rows: 50% 50%;
-      width: 100vw;
-      height: 100vh;
-    }
-    button {
-      -webkit-app-region: drag;
-      width: 100px;
-      height: 50px;
-      z-index: 3;
-      border-radius: 10px;
-      color: white;
-      outline: none;
-      background: transparent;
-      font-size: 15pt;
-      font-family: "Neoneon", cursive;
-      font-weight: bold;
-      filter: drop-shadow(3px 3px 10px 30px);
-    }
 
-    .stopButton:hover {
-      filter: drop-shadow(0px 0px 10px tomato);
-      color: tomato;
-      border-color: tomato;
-    }
+</script>
 
-    .startButton:hover {
-      filter: drop-shadow(0px 0px 10px lightgreen);
-      color: lightgreen;
-      border-color: lightgreen;
-    }
+<style>
+  @font-face {
+    font-family: Neoneon;
+    src: url("./assets/Neoneon.otf") format("opentype");
+  }
 
-    .startButton {
-      filter: drop-shadow(0px 0px 10px white);
-      margin: 5px;
-    }
-    .stopButton {
-      filter: drop-shadow(0px 0px 10px white);
-      margin: 5px;
-    }
+  body {
+    margin: 0px;
+    background-color: black;
+    font-family: "Neoneon", cursive;
+  }
 
-    .clock {
-      font-size: 40pt;
-      color: white;
-      margin: auto;
-      bottom: 0px;
-      outline: none;
-      filter: drop-shadow(0px 0px 10px white);
-    }
-    .controls {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+  .wallpaper {
+    position: fixed;
+    -webkit-app-region: drag;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("./assets/wallpaper.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 50% 50%;
+    filter: blur(40px);
+  }
+
+  .container {
+    display: grid;
+    grid-template-rows: 20px;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .startButton {
+    -webkit-app-region: no-drag;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    background: transparent;
+    font-size: 15pt;
+    font-family: "Neoneon", cursive;
+    font-weight: bold;
+    filter: drop-shadow(3px 3px 10px 30px);
+  }
+
+  .stopButton {
+    -webkit-app-region: no-drag;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    background: transparent;
+    font-size: 15pt;
+    font-family: "Neoneon", cursive;
+    font-weight: bold;
+    filter: drop-shadow(3px 3px 10px 30px);
+  }
+
+  .stopButton:hover {
+    filter: drop-shadow(0px 0px 10px tomato);
+    color: tomato;
+    border-color: tomato;
+  }
+
+  .startButton:hover {
+    filter: drop-shadow(0px 0px 10px lightgreen);
+    color: lightgreen;
+    border-color: lightgreen;
+  }
+
+  .winControls {
+    position: relative;
+    align-content: right;
+  }
+
+  .close {
+    float: right;
+    background: transparent;
+    color: white;
+    border: none;
+    -webkit-app-region: no-drag;
+  }
+
+  .min {
+    -webkit-app-region: no-drag;
+    float: right;
+    background: transparent;
+    color: white;
+    border: none;
+  }
+
+  /* .close:hover {
+    background: lightgray;
+  }
+
+  .min:hover {
+    background: lightgray;
+  } */
+
+  .startButton {
+    filter: drop-shadow(0px 0px 10px white);
+    margin: 5px;
+  }
+
+  .stopButton {
+    filter: drop-shadow(0px 0px 10px white);
+    margin: 5px;
+  }
+
+  .clock {
+    font-size: 40pt;
+    color: white;
+    margin: auto;
+    bottom: 0px;
+    outline: none;
+    filter: drop-shadow(0px 0px 10px white);
+    -webkit-app-region: no-drag;
+  }
+
+  .controls {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
 </html>
