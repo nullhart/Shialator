@@ -2,6 +2,7 @@
 
 const { app, BrowserWindow, ipcMain } = require("electron");
 
+
 const path = require("path");
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -17,6 +18,7 @@ function createWindow() {
     transparent: false,
     titleBarStyle: "hidden",
     resizable: false,
+    frame: process.platform != 'win32',
     webPreferences: {
       nodeIntegration: true
     }
@@ -120,4 +122,12 @@ ipcMain.on("KillShia", (event, arg) => {
   if (shia != null) {
     shia.destroy();
   }
+});
+
+ipcMain.on("closeApp", (event, arg) => {
+  
+});
+
+ipcMain.on("minApp", (event, arg) => {
+  
 });
