@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shialator</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="logo"><span class="logo2">Shialator</span></div>
+        </div>
+        <div class="middle">
+            <img class="gifExample" src="../assets/Example.gif"></img>
+            <span class="title">A Timer App for Lazy People</span>
+            <!-- <video class="video" src="../assets/shia.webm" autoplay loop muted></video> -->
+        </div>
+        <div class="bottom">
+            <button class="download">Download</button>
+        </div>
+        <div class="bar"><span>Made with => by Blake Mastrud</span></div>
+
+    </div>
+
+
+</body>
+
+<style>
+    @font-face {
+        font-family: Neoneon;
+        src: url("../assets/Neoneon.otf") format("opentype");
+    }
+
+    body {
+        margin: 0px;
+        width: 100vw;
+        height: 100vh;
+    }
+
+.bar {
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
+    height: 20px;
+    background-color: lightgrey;
+    font-family:monospace;
+    color: black;
+    vertical-align: middle;
+
+}
+    .container {
+        display: grid;
+        grid-template-rows: 50px 500px 30px;
+    }
+
+    .top {
+        display: flex;
+        background-color: #DE6262
+    }
+
+    .middle {
+        display: grid;
+        grid-auto-rows: 430px 80px 80px;
+        background: linear-gradient(to bottom, #DE6262, #FFB88C)
+    }
+
+    .gifExample {
+        width: 80vw;
+        height: 60vw;
+        max-width: 500px;
+        max-height: 380px;
+        margin: auto;
+        margin-top: 20px;
+
+    }
+    .bottom {
+        display: flex;
+        background-color: white
+    }
+    .download {
+        width: 130px;
+        height: 70px;
+        border-radius: 20px;
+        background: linear-gradient(to right, #DE6262, #FFB88C);
+        color: white;
+        font-weight: bold;
+        font-size: 17pt;
+        padding-top: 5px;
+        padding-left: 8px;
+        outline: none;
+        filter: drop-shadow(3px 3px 10px #DE6262);
+        font-family: 'Neoneon';
+        border: none;
+        margin: auto;
+        margin-top: 60px;
+        transition: 200ms
+    }
+    .download:hover {
+        filter: drop-shadow(7px 7px 10px #DE6262);
+    }
+
+    .video {
+        position: relative;
+        top: 412px;
+        margin: 0px;
+        overflow: hidden;
+    }
+
+    .logo {
+        position: relative;
+        left: -300px;
+        color: white;
+        font-size: 30pt;
+        font-family: 'Neoneon';
+        margin: auto;
+   
+
+    }
+
+    .logo2 {
+        margin: auto;
+    }
+
+    .title {
+        position: relative;
+        display: flex;
+        max-width: 1000px;
+        font-size: 40pt;
+        font-family: 'Neoneon';
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px;
+        margin-top: 3px;
+        color: white;
+    }
+
+    @media screen and (max-width: 992px) {
+        .title {
+
+            font-size: 25pt;
+
+        }
+    }
+
+    @media screen and (max-width: 492px) {
+        .title {
+
+            font-size: 18pt;
+
+        }
+    }
+
+    @media screen and (max-width: 842px) {
+        .logo {
+            left: 0px;
+        }
+     
+    }
+</style>
+
+</html>
