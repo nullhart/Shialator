@@ -8,7 +8,7 @@
     <title>Shialator</title>
 </head>
 
-    
+
 <body>
     <div class="container">
         <div class="top">
@@ -17,19 +17,104 @@
         <div class="middle">
             <img class="gifExample" src="https://i.ibb.co/r0Cykd5/example.gif"></img>
             <span class="title">A Timer App for Lazy People</span>
-            <!-- <video class="video" src="../assets/shia.webm" autoplay loop muted></video> -->
+            <img class="shia" src="../assets/shia.png" />
         </div>
         <div class="bottom">
-            <button class="download">Download</button>
+            <button class="download" id="download" onclick="download()">Download</button>
         </div>
-        <div class="bar"><span>Made with => by Blake Mastrud</span></div>
+        <div class="bar"><span>Made with 💖 by Blake Mastrud</span></div>
 
     </div>
 
 
 </body>
 
+
+<script>
+    function download() {
+        document.getElementById('download').classList.add('animate')
+        console.log('download')
+        setTimeout(() => {
+            document.getElementById('download').classList.remove('animate')
+        }, 400);
+
+    }
+</script>
 <style>
+    @keyframes click {
+        0% {
+            filter: drop-shadow(3px 3px 10px #DE6262)
+        }
+
+        50% {
+            filter: drop-shadow(0px 0px 0px)
+        }
+    }
+
+    /* @keyframes shiasHere {
+        0% {
+
+            left: -600px;
+            bottom: -500px;
+
+        }
+
+        20% {
+
+            left: -300px;
+            bottom: -150px;
+        }
+
+        60% {
+
+            left: -300px;
+            bottom: -150px;
+        }
+
+        100% {
+
+            left: -600px;
+            bottom: -500px;
+        }
+    } */
+
+
+    @keyframes shiasHere {
+        0% {
+
+            transform: translateX(-1100px) translateY(600px) rotate(45deg);
+
+        }
+
+        20% {
+            transform: translateX(-250px) translateY(-200px) rotate(45deg);
+
+        }
+
+        60% {
+            transform: translateX(-250px) translateY(-200px) rotate(45deg);
+
+        }
+
+        100% {
+            transform: translateX(-1100px) translateY(600px) rotate(45deg);
+        }
+    }
+
+    .animate {
+        animation: click 200ms;
+    }
+
+    .shia {
+        position: fixed;
+        left: 0px;
+        bottom: -320px;
+        animation: shiasHere 10s infinite ease-in-out;
+        will-change: transform;
+    }
+
+
+
     @font-face {
         font-family: Neoneon;
         src: url("./Neoneon.otf") format("opentype");
@@ -39,6 +124,9 @@
         margin: 0px;
         width: 100vw;
         height: 100vh;
+        margin-bottom: 40px;
+        overflow: hidden;
+
     }
 
     .bar {
@@ -50,12 +138,8 @@
         font-family: monospace;
         color: black;
         vertical-align: middle;
+        padding-left: 10px;
 
-    }
-
-    .container {
-        display: grid;
-        grid-template-rows: 50px 500px 30px;
     }
 
     .top {
@@ -88,6 +172,7 @@
         width: 130px;
         height: 70px;
         border-radius: 20px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         background: linear-gradient(to right, #DE6262, #FFB88C);
         color: white;
         font-weight: bold;
@@ -149,14 +234,40 @@
 
             font-size: 25pt;
 
+
         }
+
     }
 
     @media screen and (max-width: 492px) {
         .title {
 
             font-size: 18pt;
+            margin-top: -165px;
 
+        }
+
+
+        .middle {
+            height: 300px;
+        }
+
+        .shia {
+
+            animation: shiasHere 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes shiasHere {
+            0% {
+
+                transform: translateX(-65%);
+
+
+            }
+
+            100% {
+                transform: translateX(10%);
+            }
         }
     }
 
