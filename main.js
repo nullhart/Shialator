@@ -15,7 +15,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 400,
     height: 300,
-    transparent: false,
+    transparent: true,
     titleBarStyle: "hidden",
     resizable: false,
     frame: process.platform != 'win32',

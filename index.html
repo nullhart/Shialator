@@ -8,8 +8,9 @@
 </head>
 
 <body>
-
-  <div class="wallpaper"></div>
+  <div class="wrapper">
+    <div class="wallpaper"></div>
+  </div>
   <div class="container">
     <div class="winControls" id="winControls">
       <button class="close" id="close" onclick="exit()">&times;</button>
@@ -27,7 +28,10 @@
 </body>
 
 <script>
-  const { ipcRenderer, remote } = require("electron");
+  const {
+    ipcRenderer,
+    remote
+  } = require("electron");
 
   if (process.platform != 'win32') {
     document.getElementById('close').style = 'display: none'
@@ -64,6 +68,7 @@
       }
     });
   }
+
   function stop() {
     timer.stop();
     ipcRenderer.send("KillShia");
@@ -89,8 +94,6 @@
   function button() {
     clickSound.play();
   }
-
-
 </script>
 
 <style>
@@ -99,15 +102,35 @@
     src: url("./assets/Neoneon.otf") format("opentype");
   }
 
+
+  html,
   body {
-    margin: 0px;
-    background-color: black;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+
+
     font-family: "Neoneon", cursive;
+    border: 2px solid transparent;
+    transform: scale(.9);
+    border-radius: 10px;
+  }
+
+  .wrapper {
+    background-color: black;
+    position: fixed;
+
+    width: 100vw;
+    height: 100vh;
   }
 
   .wallpaper {
     position: fixed;
     -webkit-app-region: drag;
+    border-radius: 200%;
+
     z-index: -1;
     width: 100vw;
     height: 100vh;
@@ -121,6 +144,7 @@
 
   .container {
     display: grid;
+    border-radius: 200px;
     grid-template-rows: 20px;
     width: 100vw;
     height: 100vh;
@@ -173,6 +197,7 @@
 
   .close {
     float: right;
+    padding-right: 30px;
     background: transparent;
     color: white;
     border: none;
