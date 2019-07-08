@@ -19,6 +19,7 @@ function createWindow() {
     titleBarStyle: "hidden",
     resizable: false,
     frame: process.platform != 'win32',
+    show: false,
     webPreferences: {
       nodeIntegration: true
     }
@@ -29,6 +30,9 @@ function createWindow() {
 
   // Open the DevTools.
   // win.webContents.openDevTools();
+  win.once('ready-to-show', () => {
+    win.show()
+  })
 
   // Emitted when the window is closed.
   win.on("closed", () => {
@@ -125,9 +129,9 @@ ipcMain.on("KillShia", (event, arg) => {
 });
 
 ipcMain.on("closeApp", (event, arg) => {
-  
+
 });
 
 ipcMain.on("minApp", (event, arg) => {
-  
+
 });
