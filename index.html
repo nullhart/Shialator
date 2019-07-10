@@ -36,7 +36,11 @@
     if (process.platform != "win32") {
       document.getElementById("close").style = "display: none";
       document.getElementById("min").style = "display: none";
-      // document.getElementsById("body").style = "transform: scale(1)";
+      document.getElementsById(
+        "body"
+      ).style = `/* border: 2px solid transparent;
+      transform: scale(0.9);
+      border - radius: 10px; */`;
     }
 
     const clickSound = new Audio("./assets/button.wav");
@@ -109,9 +113,6 @@
 
     body {
       font-family: "Neoneon", cursive;
-      /* border: 2px solid transparent;
-      transform: scale(0.9);
-      border-radius: 10px; */
     }
 
     .wrapper {
