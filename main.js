@@ -1,16 +1,13 @@
 "use strict";
 
-
-
 //handle setupevents as quickly as possible
-const setupEvents = require('./installer.js')
+const setupEvents = require("./installer.js");
 if (setupEvents.handleSquirrelEvent()) {
   // squirrel event handled and app will exit in 1000ms, so don't do anything else
   return;
 }
 
 const { app, BrowserWindow, ipcMain } = require("electron");
-
 
 const path = require("path");
 
@@ -24,10 +21,11 @@ function createWindow() {
   win = new BrowserWindow({
     width: 400,
     height: 300,
-    transparent: true,
+    transparent: process.platform == "win32",
     titleBarStyle: "hidden",
     resizable: false,
-    frame: process.platform != 'win32',
+    backgroundColor: "#000000",
+    frame: process.platform != "win32",
     show: false,
     webPreferences: {
       nodeIntegration: true
@@ -39,9 +37,9 @@ function createWindow() {
 
   // Open the DevTools.
   // win.webContents.openDevTools();
-  win.once('ready-to-show', () => {
-    win.show()
-  })
+  win.once("ready-to-show", () => {
+    win.show();
+  });
 
   // Emitted when the window is closed.
   win.on("closed", () => {
@@ -137,10 +135,6 @@ ipcMain.on("KillShia", (event, arg) => {
   }
 });
 
-ipcMain.on("closeApp", (event, arg) => {
+ipcMain.on("closeApp", (event, arg) => {});
 
-});
-
-ipcMain.on("minApp", (event, arg) => {
-
-});
+ipcMain.on("minApp", (event, arg) => {});
