@@ -24,7 +24,7 @@ function createWindow() {
     transparent: process.platform == "win32",
     titleBarStyle: "hidden",
     resizable: false,
-    backgroundColor: "#000000",
+    backgroundColor: process.platform != "win32" ? "#000000" : false,
     frame: process.platform != "win32",
     show: false,
     webPreferences: {
@@ -135,6 +135,6 @@ ipcMain.on("KillShia", (event, arg) => {
   }
 });
 
-ipcMain.on("closeApp", (event, arg) => {});
+ipcMain.on("closeApp", (event, arg) => { });
 
-ipcMain.on("minApp", (event, arg) => {});
+ipcMain.on("minApp", (event, arg) => { });
