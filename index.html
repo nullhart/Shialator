@@ -24,14 +24,20 @@
       <button onclick="start()" class="startButton">START</button>
       <button onclick="stop()" class="stopButton">STOP</button>
     </div>
-  </div>
+    <div class="checkContainer">
+      <input type="checkbox" name="checkboxG2" id="repeat" class="css-checkbox" /><label for="repeat"
+        class="css-label">Repeat</label>
+    </div>
 </body>
 
 <script>
-  const {
-    ipcRenderer,
-    remote
-  } = require("electron");
+  const { ipcRenderer, remote } = require("electron");
+
+  //Globals
+  let hours;
+  let minutes;
+  let seconds;
+
 
   if (process.platform != "win32") {
     document.getElementById("close").style = "display: none";
@@ -54,10 +60,11 @@
   }
 
   function start() {
+
     button();
-    let hours = document.getElementById("hour").innerHTML;
-    let minutes = document.getElementById("minute").innerHTML;
-    let seconds = document.getElementById("second").innerHTML;
+    hours = document.getElementById("hour").innerHTML;
+    minutes = document.getElementById("minute").innerHTML;
+    seconds = document.getElementById("second").innerHTML;
 
     timer.start({
       countdown: true,
@@ -89,6 +96,15 @@
 
   timer.addEventListener("targetAchieved", function (e) {
     ipcRenderer.send("HeresShia", "ping");
+    let repeat = document.getElementById('repeat').checked
+    if (repeat == true) {
+      setTimeout(() => {
+        document.getElementById("hour").innerHTML = hours;
+        document.getElementById("minute").innerHTML = minutes;
+        document.getElementById("second").innerHTML = seconds;
+        start()
+      }, 11000);
+    }
   });
 
   function button() {
@@ -97,6 +113,57 @@
 </script>
 
 <style>
+  .checkContainer {
+    display: block;
+    z-index: 2;
+    color: white;
+    margin: auto;
+  }
+
+  .checkContainer input {
+    width: 45px;
+  }
+
+  input[type=checkbox].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+  }
+
+  input[type=checkbox].css-checkbox+label.css-label {
+    padding-left: 30px;
+    height: 25px;
+    display: inline-block;
+    line-height: 25px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 25px;
+    vertical-align: middle;
+    cursor: pointer;
+
+  }
+
+  input[type=checkbox].css-checkbox:checked+label.css-label {
+    background-position: 0 -25px;
+  }
+
+  label.css-label {
+    background-image: url(http://csscheckbox.com/checkboxes/u/csscheckbox_391ce065f36b1460c4845fa9b5173fba.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
   @font-face {
     font-family: Neoneon;
     src: url("./assets/Neoneon.otf") format("opentype");

@@ -53,7 +53,7 @@ function createWindow() {
 function summonShia() {
   // Create the browser window.
   shia = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 580,
     transparent: true,
     resizable: false,
@@ -68,7 +68,7 @@ function summonShia() {
 
   var size = screenElectron.getPrimaryDisplay().bounds;
   console.log(size);
-  var x = size.width - 800;
+  var x = size.width - 1000;
   var y = size.height - 580;
   shia.setPosition(x, y, false);
   shia.setIgnoreMouseEvents(true);
@@ -135,6 +135,6 @@ ipcMain.on("KillShia", (event, arg) => {
   }
 });
 
-ipcMain.on("closeApp", (event, arg) => { });
+ipcMain.on("closeApp", (event, arg) => {});
 
-ipcMain.on("minApp", (event, arg) => { });
+ipcMain.on("minApp", (event, arg) => {});
