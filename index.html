@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Shialator</title>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
   <script src="./node_modules/easytimer.js/dist/easytimer.min.js"></script>
 </head>
 
@@ -21,17 +22,21 @@
         contenteditable="true">00</span>:<span id="second" style="outline: none;" contenteditable="true">00</span>
     </div>
     <div class="controls">
-      <button onclick="start()" class="startButton">START</button>
-      <button onclick="stop()" class="stopButton">STOP</button>
+      <button onclick="start()" class="startButton"><span class="glow">START</span></button>
+      <button onclick="stop()" class="stopButton"><span class="glow">STOP</span></button>
     </div>
     <div class="checkContainer">
       <input type="checkbox" name="checkboxG2" id="repeat" class="css-checkbox" /><label for="repeat"
-        class="css-label">Repeat</label>
+        class="css-label glow">REPEAT</label>
     </div>
 </body>
 
+
 <script>
-  const { ipcRenderer, remote } = require("electron");
+  const {
+    ipcRenderer,
+    remote
+  } = require("electron");
 
   //Globals
   let hours;
@@ -114,11 +119,14 @@
 
 <style>
   .checkContainer {
-    display: block;
+    position: relative;
     z-index: 2;
     color: white;
     margin: auto;
+    -webkit-app-region: no-drag;
+    font-family: 'Orbitron', sans-serif;
   }
+
 
   .checkContainer input {
     width: 45px;
@@ -164,10 +172,7 @@
     user-select: none;
   }
 
-  @font-face {
-    font-family: Neoneon;
-    src: url("./assets/Neoneon.otf") format("opentype");
-  }
+
 
   html,
   body {
@@ -176,7 +181,12 @@
   }
 
   body {
-    font-family: "Neoneon", cursive;
+    font-family: 'Orbitron', sans-serif;
+
+  }
+
+  .glow {
+    filter: drop-shadow(0px 0px 15px white);
   }
 
   .wrapper {
@@ -211,33 +221,9 @@
     height: 100vh;
   }
 
-  .startButton {
-    -webkit-app-region: no-drag;
-    width: 100px;
-    height: 50px;
-    border-radius: 10px;
-    color: white;
-    outline: none;
-    background: transparent;
-    font-size: 15pt;
-    font-family: "Neoneon", cursive;
-    font-weight: bold;
-    filter: drop-shadow(3px 3px 10px 30px);
-  }
 
-  .stopButton {
-    -webkit-app-region: no-drag;
-    width: 100px;
-    height: 50px;
-    border-radius: 10px;
-    color: white;
-    outline: none;
-    background: transparent;
-    font-size: 15pt;
-    font-family: "Neoneon", cursive;
-    font-weight: bold;
-    filter: drop-shadow(3px 3px 10px 30px);
-  }
+
+
 
   .stopButton:hover {
     filter: drop-shadow(0px 0px 10px tomato);
@@ -273,21 +259,34 @@
     border: none;
   }
 
-  /* .close:hover {
-    background: lightgray;
-  }
-
-  .min:hover {
-    background: lightgray;
-  } */
 
   .startButton {
-    filter: drop-shadow(0px 0px 10px white);
+    -webkit-app-region: no-drag;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    background: transparent;
+    font-size: 15pt;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    filter: drop-shadow(0px 0px 0px white);
     margin: 5px;
   }
 
   .stopButton {
-    filter: drop-shadow(0px 0px 10px white);
+    -webkit-app-region: no-drag;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    background: transparent;
+    font-size: 15pt;
+    font-family: 'Orbitron', sans-serif;
+    filter: drop-shadow(0px 0px 0px white);
+    font-weight: bold;
     margin: 5px;
   }
 
