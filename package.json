@@ -1,12 +1,12 @@
 {
   "name": "shialator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An app to motivate us lazy people",
   "main": "main.js",
   "scripts": {
     "start": "Electron .",
-    "build": "electron-packager . --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases' &&xattr -cr ./Releases/shialator-darwin-x64/shialator.app &&codesign --deep --force --verbose --sign '9V84B6KV5Z' ./Releases/shialator-darwin-x64/shialator.app && yarn packageMac",
-    "packageMac": "electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite",
+    "build": "electron-packager . --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases'",
+    "packageMac": "xattr -cr ./Releases/shialator-darwin-x64/shialator.app && codesign --deep --force --verbose --sign '9V84B6KV5Z' ./Releases/shialator-darwin-x64/shialator.app && electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite",
     "packageWin": "node ./buildWin.js",
     "deployWin": "yarn build && yarn packageWin"
   },
