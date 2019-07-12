@@ -87,6 +87,7 @@
     document.getElementById("hour").innerHTML = "00";
     document.getElementById("minute").innerHTML = "00";
     document.getElementById("second").innerHTML = "00";
+    document.getElementById('repeat').checked = false
   }
 
   timer.addEventListener("secondsUpdated", function (e) {
@@ -101,15 +102,17 @@
 
   timer.addEventListener("targetAchieved", function (e) {
     ipcRenderer.send("HeresShia", "ping");
-    let repeat = document.getElementById('repeat').checked
-    if (repeat == true) {
-      setTimeout(() => {
+    setTimeout(() => {
+      let repeat = document.getElementById('repeat').checked
+      if (repeat == true) {
+
         document.getElementById("hour").innerHTML = hours;
         document.getElementById("minute").innerHTML = minutes;
         document.getElementById("second").innerHTML = seconds;
         start()
-      }, 11000);
-    }
+      }
+    }, 11000);
+
   });
 
   function button() {
