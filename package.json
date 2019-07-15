@@ -6,7 +6,7 @@
   "scripts": {
     "start": "Electron .",
     "build": "electron-packager . --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases'",
-    "packageMac": "xattr -cr ./Releases/shialator-darwin-x64/shialator.app && codesign --deep --force --verbose --sign '9V84B6KV5Z' ./Releases/shialator-darwin-x64/shialator.app && electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite",
+    "packageMac": "codesign --deep --force --verbose --sign '9V84B6KV5Z' ./Releases/shialator-darwin-x64/shialator.app && electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite",
     "packageWin": "node ./buildWin.js",
     "deployWin": "yarn build && yarn packageWin"
   },
