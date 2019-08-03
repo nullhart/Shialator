@@ -6,7 +6,7 @@
   "scripts": {
     "start": "Electron .",
     "build": "electron-packager .  --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases' --osx-sign",
-    "packageMac": "electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite",
+    "packageMac": "electron-installer-dmg ./dist/mas/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --title='Shialator Setup' --overwrite",
     "packageWin": "node ./buildWin.js",
     "deployWin": "yarn build && yarn packageWin",
     "pack": "electron-builder --dir",
