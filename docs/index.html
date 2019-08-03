@@ -17,12 +17,17 @@
             <div class="logo"><span class="logo2">Shialator</span></div>
         </div>
         <div class="middle">
-            <img class="gifExample" alt="Example of app" src="https://i.ibb.co/r0Cykd5/example.gif"></img>
+            <img class="gifExample" alt="Example of app" loading=lazy
+                srcset="https://i.ibb.co/r0Cykd5/example.gif"></img>
             <span class="title">A Timer App for Lazy People</span>
-            <img class="shia" alt="Image of shia" src="https://i.ibb.co/QMgvMv5/shia.png" /yay> </div> <div
-                class="bottom">
+
+            <img class="shia" alt="Image of shia" loading=lazy srcset="https://i.ibb.co/QMgvMv5/shia.png" />
+        </div>
+        <div class="bottom">
             <button class="download" id="download" onclick="download()">
-                Download
+                Download <div style="position: absolute; bottom: 0px; margin-left: 45px; font-size: 10pt; opacity: .6;">
+                    V1.2.2
+                </div>
             </button>
         </div>
         <div class=" bar"><span>Made with 💖 by Blake Mastrud</span></div>
@@ -42,7 +47,7 @@
 
     function download() {
         if (navigator.platform == 'Win32') {
-            startDownload('https://github.com/nullhart/Shialator/releases/download/V1.2.1/Setup.exe')
+            startDownload('https://github.com/nullhart/Shialator/releases/download/V1.2.2/Setup.exe')
         }
         if (navigator.platform == "MacIntel") {
             startDownload('https://github.com/nullhart/Shialator/releases/download/V1.2.1/Shialator.dmg')
