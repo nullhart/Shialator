@@ -5,15 +5,28 @@
   "main": "main.js",
   "scripts": {
     "start": "Electron .",
-    "build": "electron-packager . --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases' --osx-sign",
+    "build": "electron-packager .  --ignore='/packaged/' --icon='assets/icon.icns' --overwrite --out='Releases' --osx-sign",
     "packageMac": "electron-installer-dmg ./Releases/shialator-darwin-x64/shialator.app Shialator --out='packaged' icon='./assets/icon.icns' --overwrite",
     "packageWin": "node ./buildWin.js",
-    "deployWin": "yarn build && yarn packageWin"
+    "deployWin": "yarn build && yarn packageWin",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "shialator.nullystudios.com",
+    "mac": {
+      "target": "mas",
+      "hardenedRuntime" : true,
+      "gatekeeperAssess": false,
+      "category": "your.app.category.type",
+      "icon": "./assets/icon.icns"
+    }
   },
   "author": "Blake Mastrud",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^5.0.5",
+    "electron": "^6.0.0",
+    "electron-builder": "^21.2.0",
     "electron-installer-dmg": "^3.0.0",
     "electron-packager": "^14.0.0",
     "electron-winstaller": "^3.0.4"
