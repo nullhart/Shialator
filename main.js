@@ -55,13 +55,15 @@ function summonShia() {
   shia = new BrowserWindow({
     width: 1000,
     height: 580,
+    alwaysOnTop: true,
     transparent: true,
     resizable: false,
-    alwaysOnTop: true,
     frame: false,
+    titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false
     }
+ 
   });
 
   var screenElectron = require("electron").screen;
