@@ -7,36 +7,50 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shialator</title>
     <meta name="description" content="A timer app powered by Shia Labeouf to motivate lazy people into just doing it!!">
-    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
 
     <meta property="og:title" content="Shialator">
     <meta property="og:description" content="An timer app for lazy people">
     <meta property="og:image"
         content="https://firebasestorage.googleapis.com/v0/b/geekurus-dev.appspot.com/o/facebookPreview.webp?alt=media&token=8cbdbeff-4f32-42c5-8460-e7098de53596">
+
     <meta property="og:url" content="https://shialator.com">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145763698-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145763698-1');
+    </script>
+
 </head>
 
 
 <body>
     <div class="container">
         <div class="top">
-            <div class="logo"><span class="logo2">Shialator</span></div>
+            <div class="logo"><span class="logo2">SHIALATOR</span></div>
         </div>
         <div class="middle">
             <img class="gifExample" alt="Example of app" loading=lazy
                 srcset="https://i.ibb.co/r0Cykd5/example.gif"></img>
-            <span class="title">A Timer App for Lazy People</span>
+            <span class="title">A TIMER APP FOR LAZY PEOPLE</span>
 
             <img class="shia" alt="Image of shia" loading=lazy srcset="https://i.ibb.co/QMgvMv5/shia.png" />
         </div>
         <div class="bottom">
             <button class="download" id="download" onclick="download()">
-                Download <div style="position: absolute; bottom: 0px; margin-left: 45px; font-size: 10pt; opacity: .6;">
+                DOWNLOAD <div style="position: absolute; bottom: 0px; margin-left: 45px; font-size: 10pt; opacity: .6;">
                     V1.2.2
                 </div>
             </button>
         </div>
-        <div class=" bar"><span>Made with 💖 by Blake Mastrud</span></div>
+        <div class=" bar"><span>MADE WITH 💖BY BLAKE MASTRUD</span></div>
 
     </div>
 
@@ -54,11 +68,12 @@
 
     function download() {
         if (navigator.platform == 'Win32') {
-            startDownload('https://github.com/nullhart/Shialator/releases/download/V1.2.2/Setup.exe')
+            startDownload('https://github.com/nullhart/Shialator/releases/download/V1.2.1/Setup.exe')
         }
         if (navigator.platform == "MacIntel") {
             startDownload('https://github.com/nullhart/Shialator/releases/download/V1.2.1/Shialator.dmg')
         }
+
         document.getElementById('download').innerHTML =
             `<svg style="margin: auto;" width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
     <g fill="none" fill-rule="evenodd" stroke-width="2">
@@ -103,6 +118,8 @@
 
     }
 </script>
+
+
 <style>
     @keyframes shiasHere {
         0% {
@@ -138,16 +155,19 @@
     }
 
 
-
+    @font-face {
+        font-family: 'denver';
+        src: url('https://1382296882.rsc.cdn77.org/denver.woff2');
+    }
 
 
     body {
         margin: 0px;
         width: 100vw;
         height: 100vh;
-        margin-bottom: 40px;
-        overflow: hidden;
-        font-family: 'Lobster', cursive;
+        overflow-x: hidden;
+
+        font-family: 'denver', cursive;
     }
 
     .bar {
@@ -157,11 +177,13 @@
         width: 100vw;
         height: 25px;
         padding-top: 5px;
+        padding-left: 5px;
         background-color: lightgrey;
+        margin-top: 20px;
 
         color: black;
         vertical-align: middle;
-        padding-left: 10px;
+
     }
 
     .top {
@@ -189,7 +211,7 @@
     .bottom {
         display: flex;
         background-color: white;
-
+        height: 300px;
     }
 
     .download {
@@ -201,7 +223,7 @@
         color: white;
 
         font-size: 18pt;
-        font-family: 'Lobster', cursive;
+        font-family: 'denver', cursive;
         outline: none;
         filter: drop-shadow(3px 3px 10px #DE6262);
         border: none;
