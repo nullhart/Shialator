@@ -25,7 +25,7 @@
   "author": "Blake Mastrud",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^5.0.5",
+    "electron": "^18.3.7",
     "electron-builder": "^21.2.0",
     "electron-installer-dmg": "^3.0.0",
     "electron-packager": "^14.0.0",
